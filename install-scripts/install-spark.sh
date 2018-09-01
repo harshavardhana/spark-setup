@@ -2,13 +2,10 @@
 
 set -x
 
-INSTALL_DIR="/root/install/"
-INSTALL_DATA="/root/install-scripts/data/"
-SPARK_VERSION=2.3.1
-HADOOP_VERSION=3.1.0
+source "$(dirname $(realpath $0))/env.sh"
 
 NODE_TYPE="$1"
-MASTER_NODE_IP="$2"
+SLAVE_NODE_IP="$2"
 
 mkdir -p $INSTALL_DIR && pushd $INSTALL_DIR
 
@@ -37,10 +34,16 @@ cp $INSTALL_DIR/hadoop-${HADOOP_VERSION}/share/hadoop/tools/lib/hadoop-aws-${HAD
 	   $INSTALL_DIR/spark-${SPARK_VERSION}-bin-without-hadoop/jars
 
 if [ "$NODE_TYPE" == "master" ]; then
-    export SPARK_MASTER_HOST=$MASTER_NODE_IP
+    cp $INSTALL_DATA/spark-test.id_rsa /root/.ssh
+    echo "Host *" >/root/.ssh/config
+    echo "    StrictHostKeyChecking no" >>/root/.ssh/config
+    echo "    IdentifyFile ~/.ssh/spark-test.id_rsa" >>/root/.ssh/config
+
+    export SPARK_MASTER_HOST=$(cat "$INSTALL_DATA/master")
     $INSTALL_DIR/spark-${SPARK_VERSION}-bin-without-hadoop/sbin/start-master.sh
 else
-    $INSTALL_DIR/spark-${SPARK_VERSION}-bin-without-hadoop/sbin/start-slave.sh http://$MASTER_NODE_IP:7077/
+    export SPARK_LOCAL_IP=$SLAVE_NODE_IP
+    $INSTALL_DIR/spark-${SPARK_VERSION}-bin-without-hadoop/sbin/start-slave.sh spark://$(cat "$INSTALL_DATA/master"):7077
 fi
 
 
