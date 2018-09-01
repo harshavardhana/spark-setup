@@ -1,0 +1,5 @@
+
+How to deploy the custom spark installation on servers:
+1. Put the IP of the master node in `master` file
+2. Put the IPs of all slave nodes in `slaves` file
+
