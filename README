@@ -1,7 +1,0 @@
-
-How to deploy the custom spark installation on servers:
-1. Put the IP of the master node in `master` file.
-2. Put the IPs of all slave nodes in `slaves` file.
-3. Run `ssh-keygen` and store private & public keys under `data/` with `spark-test.id_rsa` and `spark-test.id_rsa.pub` names.
-4. Run `bash script.sh` to deploy spark in master in slaves servers
-
