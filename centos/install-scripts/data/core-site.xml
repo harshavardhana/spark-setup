@@ -68,25 +68,31 @@
   </description>
 </property>
 
+<property>
+  <name>fs.s3a.connection.ssl.enabled</name>
+  <value>false</value>
+  <description>Enables or disables SSL connections to S3.</description>
+</property>
+
   <property>
     <name>fs.s3a.endpoint</name>
     <description>AWS S3 endpoint to connect to. An up-to-date list is
       provided in the AWS Documentation: regions and endpoints. Without this
       property, the standard region (s3.amazonaws.com) is assumed.
     </description>
-    <value>https://play.minio.io:9000</value>
+    <value>http://172.31.69.207:9000</value>
   </property>
 
   <property>
     <name>fs.s3a.access.key</name>
     <description>AWS access key ID.</description>
-    <value>Q3AM3UQ867SPQQA43P2F</value>
+    <value>minio</value>
   </property>
 
   <property>
     <name>fs.s3a.secret.key</name>
     <description>AWS secret key.</description>
-    <value>zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG</value>
+    <value>minio123</value>
   </property>
 
   <property>

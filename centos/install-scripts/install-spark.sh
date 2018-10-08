@@ -17,7 +17,7 @@ wget -c https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SPARK_
 wget -c http://archive.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz && \
                tar -xf hadoop-$HADOOP_VERSION.tar.gz && \
 
-killall java
+killall -9 java
 rm /tmp/spark-home/centos-org.apache.spark.deploy.*
 
 export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")

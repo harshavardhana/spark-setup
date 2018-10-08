@@ -19,7 +19,7 @@ sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update # && apt-get -o Dpkg::Options::="--force-confold" --force-yes -y dist-upgrade
 sudo apt-get -y install psmisc python oracle-java8-installer oracle-java8-set-default
 
-killall java
+killall -9 java
 rm /tmp/spark-home/ubuntu-org.apache.spark.deploy.*
 
 export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
@@ -46,4 +46,3 @@ else
     export SPARK_LOCAL_IP=$SLAVE_NODE_IP
     $INSTALL_DIR/spark-${SPARK_VERSION}-bin-without-hadoop/sbin/start-slave.sh spark://$(cat "$INSTALL_DATA/master"):7077
 fi
-
